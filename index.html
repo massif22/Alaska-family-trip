@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Alaska 2026 Ferrari Family Trip</title>
+  <style>
+    :root {
+      --bg:#07130f; --bg2:#0b1d18; --ink:#f3ead8; --muted:#c8b899; --panel:#13261f; --panel2:#18362d;
+      --paper:#efe3ce; --paper2:#e1d1b6; --text:#15251f; --sub:#536057; --line:rgba(245,225,190,.22);
+      --gold:#d9a952; --rust:#9b5536; --blue:#3b6f7a; --moss:#577448; --shadow:rgba(0,0,0,.36);
+      --side:318px; --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg);}
+    body{margin:0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;color:var(--text);background:
+      radial-gradient(circle at 12% -10%, rgba(217,169,82,.23), transparent 34rem),
+      radial-gradient(circle at 92% 14%, rgba(59,111,122,.24), transparent 31rem),
+      linear-gradient(180deg,#07130f 0,#10251e 34rem,#c4b18e 34.1rem,#d9ceb9 100%);}
+    a{color:inherit}
+    .page{min-height:100svh;}
+    .desktop-rail{display:none}
+    .mobile-top{position:sticky;top:0;z-index:40;background:rgba(7,19,15,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:calc(8px + env(safe-area-inset-top)) 12px 8px;}
+    .mobile-top-inner{display:flex;gap:8px;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto}
+    .mobile-brand{color:var(--ink);font-weight:950;letter-spacing:-.02em;white-space:nowrap}
+    .mobile-actions{display:flex;gap:8px;}
+    button,.btn{font:inherit}
+    .chip-btn,.btn{border:1px solid rgba(245,225,190,.24);background:rgba(255,255,255,.08);color:var(--ink);border-radius:999px;padding:9px 12px;font-weight:850;text-decoration:none;line-height:1;cursor:pointer;}
+    .chip-btn.primary,.btn.primary{background:var(--gold);color:#102018;border-color:var(--gold)}
+    .content{width:min(100% - 28px, 1180px);margin:0 auto;padding-bottom:72px}
+    .hero{padding:28px 0 28px;color:var(--ink)}
+    .hero-card{position:relative;overflow:hidden;border:1px solid rgba(245,225,190,.22);border-radius:30px;min-height:440px;display:grid;align-items:end;background:
+      linear-gradient(180deg,rgba(5,13,12,.10),rgba(5,13,12,.90)),
+      url('assets/images/hero-mountains.jpg') center/cover no-repeat,#10251e;box-shadow:0 32px 100px var(--shadow)}
+    .hero-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 17% 20%,rgba(217,169,82,.18),transparent 22rem),linear-gradient(90deg,rgba(0,0,0,.52),transparent 62%);}
+    .hero-content{position:relative;z-index:1;padding:clamp(22px,4vw,48px);max-width:880px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.16em;color:#eedbb4;font-size:.78rem;font-weight:900;margin:0 0 10px}
+    h1{font-size:clamp(2.4rem,7vw,6.4rem);line-height:.88;letter-spacing:-.07em;margin:0 0 14px;text-wrap:balance}
+    .lede{font-size:clamp(1.02rem,2.2vw,1.35rem);line-height:1.42;color:#f0e5d0;max-width:780px;margin:0 0 20px}
+    .hero-meta{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 0}
+    .hero-meta span{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 11px;font-weight:800;color:#fff3dc}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .route-strip{margin:-6px 0 28px;overflow:auto;display:flex;gap:8px;padding:2px 2px 12px;scroll-snap-type:x proximity}
+    .route-strip a{flex:0 0 auto;scroll-snap-align:start;text-decoration:none;background:rgba(19,38,31,.92);color:var(--ink);border:1px solid rgba(245,225,190,.22);border-radius:999px;padding:9px 12px;font-weight:850;font-size:.88rem;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+    .route-strip span{color:#e4bc67;margin-right:4px}
+    .section{margin:30px 0}
+    .section-head{display:flex;gap:16px;align-items:end;justify-content:space-between;margin-bottom:14px}
+    h2{font-size:clamp(1.65rem,3.4vw,3.25rem);line-height:.96;letter-spacing:-.045em;margin:0;color:#0d211a;text-wrap:balance}
+    .section-head p,.muted{color:#4c584e;line-height:1.48;margin:.35rem 0 0;max-width:760px}
+    .overview{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch}
+    .story-card,.prep-card,.link-card{background:rgba(239,227,206,.94);border:1px solid rgba(19,38,31,.13);border-radius:26px;padding:22px;box-shadow:0 16px 50px rgba(30,35,25,.12)}
+    .story-card h2{margin-bottom:10px}
+
+    .photo-stack{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:10px}
+    .photo-stack figure{margin:0;position:relative;overflow:hidden;border-radius:24px;min-height:130px;background:#13261f;border:1px solid rgba(255,255,255,.08)}
+    .photo-stack figure:first-child{grid-row:span 3}
+    .photo-stack img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.98) contrast(1.02)}
+    .photo-stack figcaption{position:absolute;left:10px;bottom:10px;right:10px;background:rgba(7,19,15,.76);color:var(--ink);border:1px solid rgba(245,225,190,.18);border-radius:12px;padding:7px 9px;font-size:.82rem;font-weight:800;backdrop-filter:blur(6px)}
+
+    .feature-list{display:grid;gap:9px;margin-top:16px}
+    .feature-list div{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;background:#e4d4b9;border-radius:16px;padding:10px 12px}
+    .feature-list b{display:block;color:#10251e}
+    .feature-list small{display:block;color:#536057;line-height:1.35;margin-top:2px}
+    .itinerary-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .tool-btn{border:1px solid rgba(19,38,31,.20);background:#13261f;color:var(--ink);border-radius:999px;padding:10px 13px;font-weight:900;cursor:pointer}
+    .tool-btn.secondary{background:#d5c5a9;color:#10251e}
+    .day-list{display:grid;gap:14px}
+    .day-card{background:var(--paper);border:1px solid rgba(19,38,31,.16);border-radius:24px;box-shadow:0 12px 34px rgba(40,35,20,.13);overflow:hidden;scroll-margin-top:88px}
+    .day-card.is-open{box-shadow:0 22px 62px rgba(21,37,31,.24)}
+    .day-head{width:100%;text-align:left;border:0;background:transparent;display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:15px;align-items:center;padding:17px;cursor:pointer;color:var(--text)}
+    .day-head:hover{background:rgba(255,255,255,.22)}
+    .day-date{display:grid;place-items:center;background:#10251e;color:var(--ink);border-radius:18px;padding:10px 7px;min-height:66px;text-align:center}
+    .day-date strong{font-size:1.25rem;line-height:.95}
+    .day-date em{font-style:normal;font-weight:800;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#d4bd8c;margin-top:4px}
+    .day-copy b{display:block;font-size:clamp(1.08rem,2vw,1.35rem);line-height:1.08;color:#0d211a}
+    .day-copy small{display:block;color:#536057;line-height:1.35;margin-top:5px;max-width:780px}
+    .day-badge{border-radius:999px;padding:8px 10px;font-size:.8rem;font-weight:900;color:white;background:var(--blue);white-space:nowrap}
+    .day-card.light .day-badge{background:var(--moss)} .day-card.big .day-badge{background:var(--rust)} .day-card.travel .day-badge{background:#45525e}
+    .day-body{display:none;border-top:1px solid rgba(19,38,31,.12);padding:0 18px 18px}
+    .day-card.is-open .day-body{display:block}
+    .day-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .mini-section{padding:18px 0 6px}
+    .mini-section h3{font-size:.82rem;letter-spacing:.13em;text-transform:uppercase;margin:0 0 8px;color:#315042}
+    .mini-section ul{margin:0 0 0 1.05rem;padding:0;color:#263930;line-height:1.48}
+    .mini-section li{margin:.38rem 0}
+    .callout{margin:10px 0 14px;border-left:4px solid var(--rust);background:#dfc7a8;border-radius:14px;padding:12px 14px;color:#20342b;line-height:1.42}
+    .callout span{display:block;text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:950;color:#71371f;margin-bottom:4px}
+    .day-links{display:flex;gap:8px;flex-wrap:wrap}
+    .link-pill{text-decoration:none;background:#142b24;color:#f6eddc;border-radius:999px;padding:8px 10px;font-weight:850;font-size:.86rem;border:1px solid rgba(245,225,190,.18)}
+    .prep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .prep-card h3,.link-card h3{margin:0 0 8px;color:#0d211a}
+    .prep-card ul{margin:0 0 0 1rem;padding:0;color:#33433b;line-height:1.42}
+    .prep-card li{margin:.42rem 0}
+    .temp{font-weight:950;background:#13261f;color:#f5ead6;border-radius:14px;padding:12px;margin:12px 0}
+    .packing{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .link-card a{display:block;text-decoration:none;border-bottom:1px solid rgba(19,38,31,.17);padding:8px 0;color:#12352c;font-weight:800}
+    .footer{color:#efe1c2;background:#07130f;margin-top:40px;padding:26px 0 40px}
+    .footer .content{padding-bottom:0}
+    .footer p{margin:0;color:#c8b899}
+    .mobile-sheet{position:fixed;inset:0;z-index:80;display:none;background:rgba(4,9,8,.62);backdrop-filter:blur(10px)}
+    .mobile-sheet.open{display:block}
+    .sheet-panel{position:absolute;left:10px;right:10px;bottom:10px;max-height:min(82svh,760px);overflow:auto;border:1px solid rgba(245,225,190,.22);border-radius:28px;background:linear-gradient(180deg,#13261f,#0b1d18);box-shadow:0 24px 90px rgba(0,0,0,.55);padding:16px;color:var(--ink)}
+    .sheet-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}
+    .sheet-head h2{color:var(--ink);font-size:1.6rem}
+    .sheet-group{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+    .sheet-group h3{color:#e7c270;text-transform:uppercase;letter-spacing:.13em;font-size:.78rem;margin:0 0 10px}
+    .sheet-days{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .sheet-days a{text-decoration:none;color:var(--ink);background:rgba(255,255,255,.07);border:1px solid rgba(245,225,190,.16);border-radius:16px;padding:10px;display:grid;gap:2px}
+    .sheet-days b{color:#e7c270} .sheet-days span{font-size:.86rem;color:#e9dcc5}
+    .sheet-links{display:grid;gap:8px}
+    .sheet-links a{text-decoration:none;color:var(--ink);background:rgba(255,255,255,.06);border-radius:14px;padding:11px 12px;font-weight:850}
+    .bottom-fab{position:fixed;z-index:50;left:50%;bottom:calc(10px + env(safe-area-inset-bottom));transform:translateX(-50%);display:none;gap:8px;background:rgba(7,19,15,.88);border:1px solid rgba(245,225,190,.22);border-radius:999px;padding:8px;backdrop-filter:blur(14px);box-shadow:0 14px 44px rgba(0,0,0,.34)}
+    @media (min-width: 1040px){
+      .page{display:grid;grid-template-columns:var(--side) minmax(0,1fr)}
+      .desktop-rail{display:block;position:sticky;top:0;height:100svh;overflow:auto;background:linear-gradient(180deg,rgba(7,19,15,.97),rgba(11,29,24,.95)),url('assets/images/bear.jpg') center bottom/cover no-repeat;border-right:1px solid var(--line);box-shadow:16px 0 60px rgba(0,0,0,.22);padding:20px 18px;color:var(--ink)}
+      .desktop-rail::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,19,15,.95) 0,rgba(7,19,15,.88) 55%,rgba(7,19,15,.98) 100%);z-index:-1}
+      .rail-title{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:14px}
+      .rail-title .kicker{text-transform:uppercase;letter-spacing:.16em;color:#e7c270;font-weight:950;font-size:.72rem}
+      .rail-title h2{color:var(--ink);font-size:1.72rem;line-height:.98;margin:8px 0 0;letter-spacing:-.04em}
+      .rail-nav{display:grid;gap:6px;margin-bottom:16px}
+      .rail-nav a{text-decoration:none;border-radius:14px;padding:10px 11px;color:#f3ead8;font-weight:850;background:rgba(255,255,255,.045);border:1px solid transparent}
+      .rail-nav a:hover{border-color:rgba(245,225,190,.25);background:rgba(255,255,255,.08)}
+      .rail-days{display:grid;gap:5px;border-top:1px solid var(--line);padding-top:14px}
+      .rail-days a{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center;text-decoration:none;color:#efe5d1;border-radius:13px;padding:8px;background:rgba(255,255,255,.035);border:1px solid transparent}
+      .rail-days a.active,.rail-days a:hover{background:rgba(217,169,82,.13);border-color:rgba(217,169,82,.28)}
+      .rail-days b{color:#e7c270} .rail-days span{font-size:.86rem}
+      .mobile-top,.bottom-fab{display:none!important}
+      .content{width:min(100% - 72px,1120px)}
+      .hero{padding-top:34px}
+      .hero-card{min-height:500px}
+    }
+    @media (max-width: 1039px){.bottom-fab{display:flex}}
+    @media (max-width: 760px){
+      .content{width:min(100% - 24px,1180px)}
+      .hero{padding-top:18px}
+      .hero-card{border-radius:24px;min-height:430px}
+      .hero-content{padding:24px 18px}
+      .overview{grid-template-columns:1fr}
+      .photo-stack{grid-template-columns:1fr 1fr}
+      .photo-stack figure{min-height:132px}
+      .photo-stack figure:first-child{grid-row:auto}
+      .section-head{display:block}
+      .day-head{grid-template-columns:62px minmax(0,1fr);gap:12px;padding:14px}
+      .day-badge{grid-column:2;justify-self:start;margin-top:4px}
+      .day-date{min-height:60px;border-radius:15px}
+      .day-grid,.prep-grid,.packing,.link-grid{grid-template-columns:1fr}
+      .story-card,.prep-card,.link-card{border-radius:22px;padding:18px}
+      .sheet-days{grid-template-columns:1fr}
+    }
+    @media (max-width: 420px){
+      .mobile-brand{font-size:.9rem}
+      .chip-btn{padding:8px 10px}
+      .hero-card{min-height:390px}
+      h1{font-size:2.25rem}
+      .route-strip a{font-size:.82rem;padding:8px 10px}
+      .day-copy small{font-size:.88rem}
+      .bottom-fab{width:calc(100% - 18px);justify-content:space-between}
+      .bottom-fab .chip-btn{flex:1}
+    }
+    @media print{.desktop-rail,.mobile-top,.bottom-fab,.mobile-sheet,.route-strip,.itinerary-tools{display:none!important}body{background:white}.page{display:block}.content{width:auto;margin:0;padding:0 20px}.hero-card{box-shadow:none;min-height:auto}.day-card{break-inside:avoid;box-shadow:none}.day-body{display:block!important}}
+
+    </style>
+</head>
+<body>
+  <div class="page">
+    <aside class="desktop-rail" aria-label="Trip navigation">
+      <div class="rail-title"><div class="kicker">August 8–19, 2026</div><h2>Alaska 2026 Ferrari Family Trip</h2></div>
+      <nav class="rail-nav">
+        <a href="#overview">Big picture</a><a href="#itinerary">Plan A itinerary</a><a href="#know">Things to know before you go</a><a href="#packing">Packing list</a><a href="#links">Useful links</a>
+      </nav>
+      <div class="rail-days"><a href="#d0808"><b>8/8</b><span>Arrival</span></a><a href="#d0809"><b>8/9</b><span>Portage + Alberto</span></a><a href="#d0810"><b>8/10</b><span>Anchorage + Caterina</span></a><a href="#d0811"><b>8/11</b><span>Kenai cruise</span></a><a href="#d0812"><b>8/12</b><span>Alyeska</span></a><a href="#d0813"><b>8/13</b><span>Hatcher Pass</span></a><a href="#d0814"><b>8/14</b><span>Skilak / Russian</span></a><a href="#d0815"><b>8/15</b><span>Wildcard</span></a><a href="#d0816"><b>8/16</b><span>Denali drive</span></a><a href="#d0817"><b>8/17</b><span>Denali</span></a><a href="#d0818"><b>8/18</b><span>Return south</span></a><a href="#d0819"><b>8/19</b><span>Fly out</span></a></div>
+    </aside>
+
+    <main>
+      <div class="mobile-top"><div class="mobile-top-inner"><div class="mobile-brand">Alaska 2026</div><div class="mobile-actions"><button class="chip-btn" data-open-menu>Menu</button><a class="btn primary" href="#itinerary">Plan</a></div></div></div>
+      <div class="content">
+        <header class="hero" id="top">
+          <div class="hero-card">
+            <div class="hero-content">
+              <p class="eyebrow">August 8–19, 2026 · Southcentral Alaska</p>
+              <h1>Alaska 2026 Ferrari Family Trip</h1>
+              <p class="lede">One Girdwood base camp, one family convoy, glaciers, salmon rivers, bear country, Denali, and a realistic number of snacks.</p>
+              <div class="hero-meta"><span>Girdwood base · Aug 8–16</span><span>Kenai Fjords · Aug 11</span><span>Denali · Aug 16–18</span></div>
+              <div class="hero-actions"><a class="btn primary" href="#itinerary">Open the adventure</a><button class="chip-btn" data-open-menu>Jump around</button><a class="btn" href="#know">Read before you go</a></div>
+            </div>
+          </div>
+        </header>
+
+        <nav class="route-strip" aria-label="Day shortcuts"><a href="#d0808"><span>8/8</span>Arrival</a> · <a href="#d0809"><span>8/9</span>Portage + Alberto</a> · <a href="#d0810"><span>8/10</span>Anchorage + Caterina</a> · <a href="#d0811"><span>8/11</span>Kenai cruise</a> · <a href="#d0812"><span>8/12</span>Alyeska</a> · <a href="#d0813"><span>8/13</span>Hatcher Pass</a> · <a href="#d0814"><span>8/14</span>Skilak / Russian</a> · <a href="#d0815"><span>8/15</span>Wildcard</a> · <a href="#d0816"><span>8/16</span>Denali drive</a> · <a href="#d0817"><span>8/17</span>Denali</a> · <a href="#d0818"><span>8/18</span>Return south</a> · <a href="#d0819"><span>8/19</span>Fly out</a></nav>
+
+        <section class="section" id="overview">
+          <div class="overview">
+            <div class="story-card">
+              <p class="eyebrow" style="color:#6c4a24">The plan at a glance</p>
+              <h2>Base camp, big scenery, flexible days.</h2>
+              <p class="muted">We use <b>Girdwood</b> as home base for the first week: mountains outside, shared dinners inside, and day trips in several different directions. Then we drive north for two nights near <b>Denali</b> for interior Alaska, tundra, and the main land-wildlife day.</p>
+              <div class="feature-list">
+                <div><span>🏔️</span><p><b>Girdwood</b><small>Base camp: mountains, hikes, shared dinners.</small></p></div>
+                <div><span>🐋</span><p><b>Kenai Fjords</b><small>Boat day: glaciers, wildlife if we are lucky, cold wind very likely.</small></p></div>
+                <div><span>🐻</span><p><b>Skilak / Russian River + Denali</b><small>Salmon country, bear awareness, interior wildlife.</small></p></div>
+              </div>
+            </div>
+            <div class="photo-stack" aria-label="Trip photos">
+              <figure><img src="assets/images/bear.jpg" alt="Bear in Alaska" loading="lazy"><figcaption>Bear country</figcaption></figure>
+              <figure><img src="assets/images/glacier-fjord.jpg" alt="Glacier and fjord scenery" loading="lazy"><figcaption>Glacier water</figcaption></figure>
+              <figure><img src="assets/images/denali-road.jpg" alt="Denali mountain and park road" loading="lazy"><figcaption>Denali road</figcaption></figure>
+              <figure><img src="assets/images/hero-mountains.jpg" alt="Alaska mountain landscape" loading="lazy"><figcaption>Mountain country</figcaption></figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="itinerary">
+          <div class="section-head"><div><p class="eyebrow" style="color:#6c4a24">Plan A</p><h2>Day-by-day itinerary</h2><p>Tap any day to expand it. On laptop, use the left rail; on phone, use the bottom menu.</p></div></div>
+          <div class="itinerary-tools"><button class="tool-btn" data-expand-all>Open all days</button><button class="tool-btn secondary" data-collapse-all>Close all</button></div>
+          <div class="day-list">
+    <article class="day-card light" id="d0808">
+      <button class="day-head" aria-expanded="false" aria-controls="d0808-body">
+        <span class="day-date"><strong>8/8</strong><em>Sat</em></span>
+        <span class="day-copy"><b>Arrival in Anchorage → Girdwood</b><small>Land, pick up the cars, reach Girdwood, settle in without trying to solve the whole trip on night one.</small></span>
+        <span class="day-badge">Light / travel</span>
+      </button>
+      <div class="day-body" id="d0808-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Most arrivals in Anchorage in the evening.</li><li>Pick up rental vehicles and load bags.</li><li>Drive to the Girdwood Airbnb, find bedrooms, and keep the evening simple.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: Anchorage airport → Girdwood: about 45–50 min.</li><li>Food: keep dinner/snacks simple; the main grocery run is tomorrow.</li><li>Reservation: Spacious Girdwood Retreat, 151 Mt Hood Dr, Girdwood. Check-in after 3:00 PM. Confirmation codes omitted.</li><li>Capacity check: group becomes 13 once Caterina arrives; host approval should be explicit because the listing appears to cap guests at 12.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>Airbnb booked. The goal is to arrive, sleep, and start fresh the next morning. Separate admin item: confirm the host explicitly approves 13 total occupants including Miriam.</aside>
+        <div class="day-links"><a class="link-pill" href="https://maps.google.com/maps?daddr=60.96259500000001,-149.125461" target="_blank" rel="noopener">Airbnb map</a><a class="link-pill" href="https://www.girdwood.com/" target="_blank" rel="noopener">Girdwood info</a></div>
+      </div>
+    </article>
+    <article class="day-card medium" id="d0809">
+      <button class="day-head" aria-expanded="false" aria-controls="d0809-body">
+        <span class="day-date"><strong>8/9</strong><em>Sun</em></span>
+        <span class="day-copy"><b>Wildlife Conservation Center + Portage / Byron Glacier</b><small>Structured first full day close to Girdwood, then one car handles a late Alberto pickup.</small></span>
+        <span class="day-badge">Medium / nearby</span>
+      </button>
+      <div class="day-body" id="d0809-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Slow morning in Girdwood.</li><li>Do the Alaska Wildlife Conservation Center as the main structured attraction.</li><li>Add Portage Lake and, if timing/weather are good, the short Byron Glacier Trail.</li><li>Return to Girdwood for dinner; most of the group should not spend the evening waiting at the airport.</li><li>One car goes to Anchorage in the evening for Alberto’s late arrival.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: Girdwood → Wildlife Center: about 15–20 min; Portage is just beyond that.</li><li>Lunch: grab something before leaving Girdwood, or keep it simple with a picnic/snacks.</li><li>Dinner: simple Airbnb meal or local Girdwood pub. Call ahead if trying to seat a large group.</li><li>Alberto: arrives Anchorage at <b>9:25 PM</b>. Pickup car leaves Girdwood around <b>7:30–7:45 PM</b> if doing groceries first, or around <b>8:15 PM</b> if going airport-only.</li><li>Grocery run: the Alberto car can pick up the big supply run before the airport; otherwise do a small emergency shop and finish on 8/10.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>This flip keeps the first full day real, but prevents the whole family from loitering in Anchorage until a 9:25 PM flight.</aside>
+        <div class="day-links"><a class="link-pill" href="https://alaskawildlife.org/" target="_blank" rel="noopener">Alaska Wildlife Conservation Center</a><a class="link-pill" href="https://www.fs.usda.gov/recarea/chugach/recarea/?recid=6646" target="_blank" rel="noopener">Byron Glacier Trail</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Portage+Lake+Alaska" target="_blank" rel="noopener">Portage Lake map</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Costco+Anchorage" target="_blank" rel="noopener">Costco Anchorage</a></div>
+      </div>
+    </article>
+    <article class="day-card light" id="d0810">
+      <button class="day-head" aria-expanded="false" aria-controls="d0810-body">
+        <span class="day-date"><strong>8/10</strong><em>Mon</em></span>
+        <span class="day-copy"><b>Anchorage / Coastal Trail + Caterina pickup</b><small>Lighter Anchorage day before Kenai: supplies, coastal views, lunch, and Caterina at 3:05 PM.</small></span>
+        <span class="day-badge">Light / practical</span>
+      </button>
+      <div class="day-body" id="d0810-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Late morning drive from Girdwood to Anchorage.</li><li>Finish groceries/gear if the Alberto pickup car did not complete the run on 8/9.</li><li>Walk a manageable section of the Tony Knowles Coastal Trail.</li><li>Lunch in Anchorage.</li><li>Pick up Caterina at Anchorage airport; her Condor flight arrives at <b>3:05 PM</b>.</li><li>Return to Girdwood late afternoon for a normal dinner.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: Girdwood ↔ Anchorage: about 45–60 min each way.</li><li>Keep this day light: tomorrow is the long Seward / Kenai Fjords cruise day.</li><li>Airport split: if the group is still doing Anchorage activities, pickup is easy; otherwise one car peels off and returns.</li><li>Food: use this day to stabilize breakfast, picnic lunch, and snack supplies for the rest of the Girdwood week.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>This is the practical Anchorage day. It gives Caterina a clean entry and avoids stacking a hard outing immediately before Kenai.</aside>
+        <div class="day-links"><a class="link-pill" href="https://anchoragecoastaltrail.com/" target="_blank" rel="noopener">Coastal Trail</a><a class="link-pill" href="https://www.anchorage.net/outdoors/trails-and-local-parks/coastal-trail/" target="_blank" rel="noopener">Anchorage trail page</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Anchorage+International+Airport" target="_blank" rel="noopener">Anchorage airport map</a></div>
+      </div>
+    </article>
+
+    <article class="day-card big" id="d0811">
+      <button class="day-head" aria-expanded="false" aria-controls="d0811-body">
+        <span class="day-date"><strong>8/11</strong><em>Tue</em></span>
+        <span class="day-copy"><b>Kenai Fjords cruise from Seward</b><small>Big glacier-and-wildlife boat day from Seward; target the 11:30 AM departure, not the brutally early one.</small></span>
+        <span class="day-badge">Big day</span>
+      </button>
+      <div class="day-body" id="d0811-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Drive from Girdwood to Seward with a real buffer.</li><li>Target the Major Marine 6-hour Kenai Fjords National Park cruise, ideally <b>11:30 AM–5:30 PM</b>.</li><li>Return to Girdwood after the cruise.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: Girdwood → Seward: plan ~2.5 hrs with group buffer.</li><li>Cruise: <b>not booked yet</b>. Target Major Marine 6-hour National Park cruise, ideally 11:30 AM–5:30 PM.</li><li>Group booking: book all 13 together if possible so the group is not split.</li><li>Return: expect a late dinner / simple Airbnb evening.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Boat note</span>Bring warm layers, rain shell, hat, and seasickness meds if you might need them. Take meds before boarding.</aside>
+        <div class="day-links"><a class="link-pill" href="https://majormarine.com/tour/6-hour-kenai-fjords-national-park-cruise/" target="_blank" rel="noopener">Major Marine 6-hour cruise</a><a class="link-pill" href="https://www.nps.gov/kefj/index.htm" target="_blank" rel="noopener">Kenai Fjords NPS</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Seward+Harbor+Alaska" target="_blank" rel="noopener">Seward harbor map</a></div>
+      </div>
+    </article>
+
+    <article class="day-card medium" id="d0812">
+      <button class="day-head" aria-expanded="false" aria-controls="d0812-body">
+        <span class="day-date"><strong>8/12</strong><em>Wed</em></span>
+        <span class="day-copy"><b>Alyeska Tram + Winner Creek</b><small>Local scenic day in Girdwood: tram up the mountain, forest hike if the group has legs.</small></span>
+        <span class="day-badge">Medium</span>
+      </button>
+      <div class="day-body" id="d0812-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Alyeska Aerial Tram for views over Turnagain Arm and the Chugach Mountains.</li><li>Short summit walk / lunch / photos above Girdwood.</li><li>Winner Creek Trail if energy and weather are good.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: local Girdwood, generally 0–10 min.</li><li>Effort: flexible. Tram is easy; Winner Creek is the optional add-on if energy is good.</li><li>Booking: weather-dependent; no need to over-plan too early.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>If clouds are sitting on the mountain, do not pay good money to admire fog. We can admire fog for free from almost anywhere.</aside>
+        <div class="day-links"><a class="link-pill" href="https://www.alyeskaresort.com/aerial-tram-summer/" target="_blank" rel="noopener">Alyeska Tram</a><a class="link-pill" href="https://www.visitgirdwood.com/explore/lower-winner-creek-trail" target="_blank" rel="noopener">Winner Creek Trail</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Alyeska+Aerial+Tram" target="_blank" rel="noopener">Alyeska map</a></div>
+      </div>
+    </article>
+
+    <article class="day-card big" id="d0813">
+      <button class="day-head" aria-expanded="false" aria-controls="d0813-body">
+        <span class="day-date"><strong>8/13</strong><em>Thu</em></span>
+        <span class="day-copy"><b>Hatcher Pass + Independence Mine</b><small>Alpine drive, old mine buildings, short hikes, picnic, and proof Alaska has more than one screensaver.</small></span>
+        <span class="day-badge">Medium-big</span>
+      </button>
+      <div class="day-body" id="d0813-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Drive toward Hatcher Pass / Palmer area.</li><li>Visit Independence Mine State Historical Park: old gold mine, big views, no actual family mining business to launch.</li><li>Short hikes / viewpoint stops / picnic.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: plan ~2 hrs each way from Girdwood, longer with stops.</li><li>Road note: some Hatcher Pass roads can be seasonal/gravel; check current road conditions before going.</li><li>Food: picnic works better than gambling on group restaurant logistics with thirteen people.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>Alpine scenery, mining history, broad mountain views. Keep the walks flexible.</aside>
+        <div class="day-links"><a class="link-pill" href="https://dnr.alaska.gov/parks/aspunits/matsu/indepmineshp.htm" target="_blank" rel="noopener">Independence Mine official</a><a class="link-pill" href="https://www.travelalaska.com/destinations/parks-public-lands/independence-mine-state-historical-park" target="_blank" rel="noopener">Travel Alaska page</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Independence+Mine+State+Historical+Park" target="_blank" rel="noopener">Mine map</a></div>
+      </div>
+    </article>
+
+    <article class="day-card big" id="d0814">
+      <button class="day-head" aria-expanded="false" aria-controls="d0814-body">
+        <span class="day-date"><strong>8/14</strong><em>Fri</em></span>
+        <span class="day-copy"><b>Skilak Lake / Russian River</b><small>Salmon river, lake overlooks, possible wildlife, and a day to be deliberate about bear awareness.</small></span>
+        <span class="day-badge">Medium-big</span>
+      </button>
+      <div class="day-body" id="d0814-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Drive toward Cooper Landing / Russian River.</li><li>Russian River Falls hike if conditions are good: salmon, forest, and the strong possibility of adults saying “stay together” every seven minutes.</li><li>Skilak Lake Road for scenic stops, lake views, and picnic.</li><li>Return to Girdwood.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: Girdwood → Cooper Landing / Russian River area: roughly 1.75–2.25 hrs.</li><li>Trail: Russian River Falls is about 2 miles each way on an easy/wide trail.</li><li>Road: Skilak Lake Road is a gravel scenic/refuge road; conditions can vary.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>Bear-country day: stay together, make noise, control food, carry bear spray, and skip the hike if trail or bear conditions are poor.</aside>
+        <div class="day-links"><a class="link-pill" href="https://www.adfg.alaska.gov/index.cfm?adfg=viewinglocations.russianriverfalls" target="_blank" rel="noopener">Russian River wildlife viewing</a><a class="link-pill" href="https://www.alaska.org/detail/russian-river-falls" target="_blank" rel="noopener">Russian River Falls guide</a><a class="link-pill" href="https://www.adfg.alaska.gov/index.cfm?adfg=viewinglocations.skilaklakeroad" target="_blank" rel="noopener">Skilak Lake Road</a><a class="link-pill" href="https://www.fws.gov/refuge/kenai" target="_blank" rel="noopener">Kenai NWR</a></div>
+      </div>
+    </article>
+
+    <article class="day-card light" id="d0815">
+      <button class="day-head" aria-expanded="false" aria-controls="d0815-body">
+        <span class="day-date"><strong>8/15</strong><em>Sat</em></span>
+        <span class="day-copy"><b>Local wildcard / prep day</b><small>The safety valve: local fun, weather make-up, laundry, packing, and an easier pace before Denali.</small></span>
+        <span class="day-badge">Light / flexible</span>
+      </button>
+      <div class="day-body" id="d0815-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Crow Creek Mine.</li><li>Turnagain Arm scenic stops.</li><li>Repeat a favorite short hike.</li><li>Girdwood Brewery / casual lunch.</li><li>Laundry, packing, and groceries before Denali.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: mostly local or short.</li><li>Purpose: preserve flexibility before leaving Girdwood.</li><li>Weather swap: this can absorb Alyeska, Hatcher, or Skilak if weather forces a move.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>Keep this day flexible unless weather forces a swap from earlier in the week.</aside>
+        <div class="day-links"><a class="link-pill" href="https://www.crowcreekmine.com/" target="_blank" rel="noopener">Crow Creek Mine</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Beluga+Point+Anchorage" target="_blank" rel="noopener">Beluga Point map</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Girdwood+Brewing+Company" target="_blank" rel="noopener">Girdwood Brewery map</a></div>
+      </div>
+    </article>
+
+    <article class="day-card travel" id="d0816">
+      <button class="day-head" aria-expanded="false" aria-controls="d0816-body">
+        <span class="day-date"><strong>8/16</strong><em>Sun</em></span>
+        <span class="day-copy"><b>Mass in Anchorage + drive to Denali via Talkeetna</b><small>Mass, Talkeetna, then the northbound caravan to Denali. Scenic, long, manageable.</small></span>
+        <span class="day-badge">Travel day</span>
+      </button>
+      <div class="day-body" id="d0816-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Check out of Girdwood Airbnb by 10:00 AM.</li><li>Mass in Anchorage, likely Holy Family depending final timing.</li><li>Drive north toward Denali.</li><li>Talkeetna lunch/walk stop if timing works: stretch legs, eat, and keep moving north.</li><li>Check in at Denali Princess Wilderness Lodge.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: Girdwood → Anchorage: ~45–60 min; Anchorage → Denali area: ~5 hrs before stops.</li><li>Mass: Holy Family is downtown Anchorage; verify current Mass times closer to departure.</li><li>Luggage: consider dropping large bags at Comfort Suites on the way through Anchorage if the hotel confirms storage before the Aug 18 stay.</li><li>Reservation: Denali Princess Wilderness Lodge, Milepost 238.5 Parks Highway. Arrival Aug 16, departure Aug 18. Confirmation details omitted. Room capacity should be rechecked for all three rooms.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>Full travel day. “Just one more quick stop” must actually be quick, a standard rarely met by extended families.</aside>
+        <div class="day-links"><a class="link-pill" href="https://www.holyfamilycathedral.org/" target="_blank" rel="noopener">Holy Family Anchorage</a><a class="link-pill" href="https://www.princesslodges.com/princess-alaska-lodges/denali-lodge/" target="_blank" rel="noopener">Denali Princess Lodge</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Talkeetna+Alaska" target="_blank" rel="noopener">Talkeetna map</a></div>
+      </div>
+    </article>
+
+    <article class="day-card big" id="d0817">
+      <button class="day-head" aria-expanded="false" aria-controls="d0817-body">
+        <span class="day-date"><strong>8/17</strong><em>Mon</em></span>
+        <span class="day-copy"><b>Denali wildlife bus day</b><small>Interior Alaska day: tundra, wildlife spotting, and a bus ride where binoculars become social status.</small></span>
+        <span class="day-badge">Medium-big</span>
+      </button>
+      <div class="day-body" id="d0817-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Denali Tundra Wilderness Tour / bus option.</li><li>Visitor Center / simple evening after the tour.</li><li>No major second activity planned; this is the main Denali day.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Tour: Tundra Wilderness Tour is listed as 5–5.5 hrs to Mile 43 in 2026.</li><li>Booking: <b>not booked yet</b>. For 13 people, book together if possible to avoid getting split across buses. Confirm seats/requirements for children and infants.</li><li>Wildlife: no guarantees. Bring binoculars and patience.</li><li>Packing: layers, water, snacks.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>Road closure note: 2026 access is expected to turn around at Mile 43 / East Fork because of the Pretty Rocks landslide. Denali is still worth doing; we just are not pretending this is the old road-to-the-end version.</aside>
+        <div class="day-links"><a class="link-pill" href="https://www.reservedenali.com/tours-transits/the-denali-tour-experience/tundra-wilderness-tour/" target="_blank" rel="noopener">ReserveDenali tour info</a><a class="link-pill" href="https://www.nps.gov/dena/planyourvisit/current-conditions.htm" target="_blank" rel="noopener">Denali current conditions</a><a class="link-pill" href="https://www.nps.gov/dena/index.htm" target="_blank" rel="noopener">Denali NPS</a></div>
+      </div>
+    </article>
+    <article class="day-card travel" id="d0818">
+      <button class="day-head" aria-expanded="false" aria-controls="d0818-body">
+        <span class="day-date"><strong>8/18</strong><em>Tue</em></span>
+        <span class="day-copy"><b>Short Denali morning + return cars in Anchorage</b><small>Pack, check out, drive south, unload, refuel, and return the cars by evening.</small></span>
+        <span class="day-badge">Travel / logistics</span>
+      </button>
+      <div class="day-body" id="d0818-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Breakfast and packing at Denali Princess.</li><li>Optional very short walk only: hotel area, visitor center area, or a quick viewpoint.</li><li>Check out by <b>11:00 AM</b>.</li><li>Leave the Denali area by about <b>11:30 AM–12:00 PM</b> at the latest.</li><li>Drive south to Anchorage, unload at Comfort Suites, refuel, and return rental cars.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>Drive: Denali area → Anchorage airport area: plan 4.5–5+ hrs, more with stops.</li><li>Car returns: National due around <b>6:00 PM</b>; Alamo due around <b>7:00 PM</b>. No rental car return on 8/19.</li><li>Sequence: unload people/bags at Comfort Suites first, then fuel and return cars.</li><li>Reservation: Comfort Suites Anchorage International Airport, 2919 West International Airport. Check-in Aug 18; 3 rooms, breakfast included. Confirmation/PIN omitted.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Logistics note</span>This is not a real hiking morning. The win is getting south, unloading cleanly, and returning both cars on time.</aside>
+        <div class="day-links"><a class="link-pill" href="https://www.nps.gov/dena/planyourvisit/dayhiking.htm" target="_blank" rel="noopener">Denali day hiking</a><a class="link-pill" href="https://www.choicehotels.com/alaska/anchorage/comfort-suites-hotels/ak026" target="_blank" rel="noopener">Comfort Suites airport</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Comfort+Suites+Anchorage+International+Airport" target="_blank" rel="noopener">Hotel map</a></div>
+      </div>
+    </article>
+    <article class="day-card travel" id="d0819">
+      <button class="day-head" aria-expanded="false" aria-controls="d0819-body">
+        <span class="day-date"><strong>8/19</strong><em>Wed</em></span>
+        <span class="day-copy"><b>Flights out</b><small>Airport shuttle morning. Cars are already returned; the adventure ends, the laundry begins.</small></span>
+        <span class="day-badge">Travel only</span>
+      </button>
+      <div class="day-body" id="d0819-body">
+        <div class="day-grid">
+          <section class="mini-section">
+            <h3>Program</h3>
+            <ul><li>Early airport transfer for the Europe group.</li><li>Caterina and the Europe group depart Anchorage at about <b>8:15 AM</b>.</li><li>Breakfast only if timing permits.</li><li>Flights home / onward to Europe.</li></ul>
+          </section>
+          <section class="mini-section">
+            <h3>Logistics</h3>
+            <ul><li>No rental car returns today; cars are returned on 8/18.</li><li>Book/confirm the Comfort Suites airport shuttle for around <b>5:45–6:00 AM</b>.</li><li>Confirm shuttle capacity for the group and luggage; if needed, plan two shuttle runs or backup rides.</li><li>Group task: passports, chargers, car seats, and bags checked before leaving the hotel.</li></ul>
+          </section>
+        </div>
+        <aside class="callout"><span>Field note</span>Cars already gone. This morning is about shuttle timing, luggage, passports, and not discovering a missing charger at the airport.</aside>
+        <div class="day-links"><a class="link-pill" href="https://www.choicehotels.com/alaska/anchorage/comfort-suites-hotels/ak026" target="_blank" rel="noopener">Comfort Suites airport</a><a class="link-pill" href="https://www.google.com/maps/search/?api=1&amp;query=Anchorage+International+Airport" target="_blank" rel="noopener">Anchorage airport map</a></div>
+      </div>
+    </article></div>
+        </section>
+
+        <section class="section" id="know">
+          <div class="section-head"><div><p class="eyebrow" style="color:#6c4a24">Now before you go</p><h2>Things to know before you go</h2><p>General guidance for the whole trip. Day-specific notes live inside the relevant day cards.</p></div></div>
+          <div class="prep-grid">
+            <div class="prep-card"><h3>Weather</h3><div class="temp">Expect roughly 10–18°C most days. Rain is normal in August.</div><ul><li>Layers beat one heavy coat.</li><li>Boat day feels colder than land. Dress for wind and spray.</li><li>Rain is not automatically a cancellation; it is part of traveling in Alaska.</li></ul></div>
+            <div class="prep-card"><h3>Wildlife</h3><ul><li>Do not approach animals, even for a good photo.</li><li>Kids should not run ahead on trails.</li><li>Control food and snacks, especially on trail days.</li><li>If a bear is nearby: do not run; group up and calmly create distance.</li></ul></div>
+            <div class="prep-card"><h3>Driving</h3><ul><li>Drives are part of the trip, not interruptions of the trip.</li><li>Distances are real even when the map looks innocent.</li><li>Use bathrooms and snacks strategically.</li><li>Avoid night driving when possible; wildlife on roads is a real issue.</li></ul></div>
+            <div class="prep-card"><h3>Group rhythm</h3><ul><li>Big days are balanced with local/flexible days.</li><li>Optional walks are genuinely optional.</li><li>Picnic logistics will beat group restaurant chaos almost every time.</li><li>Keep day packs ready; do not repack civilization every morning.</li></ul></div>
+            <div class="prep-card"><h3>Open logistics to confirm</h3><ul><li><b>Airbnb capacity:</b> listing appears to be max 12; with Caterina the group is 13. Get explicit host approval, including Miriam as an infant/child.</li><li><b>Denali rooms:</b> recheck bed setup and occupancy across all three rooms.</li><li><b>Vehicles/luggage:</b> two 7-seat minivans are legal but tight. Use soft bags, limit luggage, and consider storing large bags at Comfort Suites before Denali.</li><li><b>Bookings still open:</b> Major Marine cruise and Denali bus tour.</li></ul></div>
+          </div>
+        </section>
+
+        <section class="section" id="packing">
+          <div class="section-head"><div><p class="eyebrow" style="color:#6c4a24">Recommended packing</p><h2>Bring layers, snacks, and practical shoes.</h2></div></div>
+          <div class="packing">
+            <div class="prep-card"><h3>Everyone</h3><ul><li>Waterproof rain jacket</li><li>Fleece / warm layer</li><li>Long hiking pants</li><li>Comfortable hiking shoes</li><li>Warm hat + sun hat</li><li>Small day backpack</li><li>Water bottle</li><li>Battery pack / charger</li></ul></div>
+            <div class="prep-card"><h3>Outdoor days</h3><ul><li>Bug spray</li><li>Sunscreen</li><li>Extra socks</li><li>Light gloves</li><li>Snacks</li><li>Wipes / small towel</li><li>Binoculars if available</li></ul></div>
+            <div class="prep-card"><h3>Boat + shared gear</h3><ul><li>Warm hat and rain shell for cruise</li><li>Seasickness meds/bands</li><li>Bear spray bought locally</li><li>First aid kit</li><li>Cooler for car lunches</li><li>Trash bags / ziplocks</li><li>Laundry detergent</li></ul></div>
+          </div>
+        </section>
+
+        <section class="section" id="links">
+          <div class="section-head"><div><p class="eyebrow" style="color:#6c4a24">Useful links</p><h2>Official pages and planning sources</h2></div></div>
+          <div class="link-grid">
+            <div class="link-card"><h3>Core attractions</h3><a href="https://majormarine.com/tour/6-hour-kenai-fjords-national-park-cruise/" target="_blank">Major Marine Kenai Fjords</a><a href="https://alaskawildlife.org/" target="_blank">Alaska Wildlife Conservation Center</a><a href="https://www.alyeskaresort.com/aerial-tram-summer/" target="_blank">Alyeska Tram</a><a href="https://dnr.alaska.gov/parks/aspunits/matsu/indepmineshp.htm" target="_blank">Independence Mine</a><a href="https://www.adfg.alaska.gov/index.cfm?adfg=viewinglocations.russianriverfalls" target="_blank">Russian River Falls</a></div>
+            <div class="link-card"><h3>Denali</h3><a href="https://www.reservedenali.com/tours-transits/the-denali-tour-experience/tundra-wilderness-tour/" target="_blank">Tundra Wilderness Tour</a><a href="https://www.nps.gov/dena/planyourvisit/current-conditions.htm" target="_blank">Denali current conditions</a><a href="https://www.nps.gov/dena/index.htm" target="_blank">Denali NPS</a><a href="https://www.nps.gov/dena/planyourvisit/dayhiking.htm" target="_blank">Denali day hiking</a></div>
+            <div class="link-card"><h3>General prep</h3><a href="https://www.travelalaska.com/explore-alaska/articles/alaska-weather-month" target="_blank">Alaska weather by month</a><a href="https://www.nps.gov/dena/planyourvisit/bear-safety.htm" target="_blank">NPS bear safety</a><a href="https://www.alaska.org/advice/mileage-chart" target="_blank">Alaska driving distances</a><a href="https://anchoragecoastaltrail.com/" target="_blank">Tony Knowles Coastal Trail</a></div>
+          </div>
+        </section>
+      </div>
+      <footer class="footer"><div class="content"><p>Shareable family version. Confirmation codes, PINs, payment information, and card details are intentionally omitted.</p></div><p style="margin-top:10px;color:#94a89b;font-size:12px">Photos are packaged inside this deployment, so they do not depend on external image hosts.</p>
+</footer>
+    </main>
+  </div>
+
+  <div class="bottom-fab" aria-label="Mobile controls"><button class="chip-btn primary" data-open-menu>Menu</button><a class="chip-btn" href="#itinerary">Plan</a><a class="chip-btn" href="#know">Know</a><a class="chip-btn" href="#top">Top</a></div>
+
+  <div class="mobile-sheet" id="mobileSheet" aria-hidden="true">
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-label="Jump around">
+      <div class="sheet-head"><h2>Jump around</h2><button class="chip-btn" data-close-menu>Close</button></div>
+      <div class="sheet-group"><h3>Sections</h3><div class="sheet-links"><a href="#overview" data-close-menu>Overview</a><a href="#itinerary" data-close-menu>Plan A itinerary</a><a href="#know" data-close-menu>Things to know before you go</a><a href="#packing" data-close-menu>Packing list</a><a href="#links" data-close-menu>Useful links</a></div></div>
+      <div class="sheet-group"><h3>Jump to a day</h3><div class="sheet-days"><a href="#d0808" data-close-menu><b>8/8</b><span>Arrival</span></a><a href="#d0809" data-close-menu><b>8/9</b><span>Portage + Alberto</span></a><a href="#d0810" data-close-menu><b>8/10</b><span>Anchorage + Caterina</span></a><a href="#d0811" data-close-menu><b>8/11</b><span>Kenai cruise</span></a><a href="#d0812" data-close-menu><b>8/12</b><span>Alyeska</span></a><a href="#d0813" data-close-menu><b>8/13</b><span>Hatcher Pass</span></a><a href="#d0814" data-close-menu><b>8/14</b><span>Skilak / Russian</span></a><a href="#d0815" data-close-menu><b>8/15</b><span>Wildcard</span></a><a href="#d0816" data-close-menu><b>8/16</b><span>Denali drive</span></a><a href="#d0817" data-close-menu><b>8/17</b><span>Denali</span></a><a href="#d0818" data-close-menu><b>8/18</b><span>Return south</span></a><a href="#d0819" data-close-menu><b>8/19</b><span>Fly out</span></a></div></div>
+      <div class="sheet-group"><h3>Controls</h3><div class="sheet-links"><a href="#" data-expand-all data-close-menu>Open all days</a><a href="#" data-collapse-all data-close-menu>Close all days</a></div></div>
+    </div>
+  </div>
+
+  <script>
+    const qs = (s, r=document) => r.querySelector(s);
+    const qsa = (s, r=document) => [...r.querySelectorAll(s)];
+    const sheet = qs('#mobileSheet');
+    function openSheet() { sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeSheet() { sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    qsa('[data-open-menu]').forEach(b=>b.addEventListener('click', openSheet));
+    qsa('[data-close-menu]').forEach(b=>b.addEventListener('click', e=>{ if(b.getAttribute('href')==='#') e.preventDefault(); closeSheet(); }));
+    sheet.addEventListener('click', e=>{ if(e.target===sheet) closeSheet(); });
+    qsa('.day-head').forEach(btn=>{ btn.addEventListener('click',()=>{ const card=btn.closest('.day-card'); const open=card.classList.toggle('is-open'); btn.setAttribute('aria-expanded', open?'true':'false'); }); });
+    function expandAll(e){ if(e) e.preventDefault(); qsa('.day-card').forEach(c=>{c.classList.add('is-open'); const b=qs('.day-head',c); if(b) b.setAttribute('aria-expanded','true');}); }
+    function collapseAll(e){ if(e) e.preventDefault(); qsa('.day-card').forEach(c=>{c.classList.remove('is-open'); const b=qs('.day-head',c); if(b) b.setAttribute('aria-expanded','false');}); }
+    qsa('[data-expand-all]').forEach(b=>b.addEventListener('click', expandAll));
+    qsa('[data-collapse-all]').forEach(b=>b.addEventListener('click', collapseAll));
+    // Open the first two days on initial load for usefulness without overwhelming mobile.
+    qsa('.day-card').slice(0,2).forEach(c=>{ c.classList.add('is-open'); const b=qs('.day-head',c); if(b) b.setAttribute('aria-expanded','true'); });
+    const dayLinks = qsa('.rail-days a');
+    const obs = new IntersectionObserver(entries=>{ entries.forEach(en=>{ if(en.isIntersecting){ dayLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+en.target.id)); } }); }, {rootMargin:'-25% 0px -65% 0px', threshold:0});
+    qsa('.day-card').forEach(d=>obs.observe(d));
+  </script>
+</body>
+</html>
